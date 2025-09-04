@@ -1,0 +1,37 @@
+<?php
+
+$MESS['SALE_CASHBOX_PAYTI_TITLE'] = 'Payti';
+$MESS['SALE_CASHBOX_PAYTI_HANDLER_TITLE'] = 'Payti ФФД 1.2 ФФД 1.2';
+$MESS['SALE_CASHBOX_PAYTI_WARNING'] = 'Техническая поддержка модуля <b>' . $MESS['SALE_CASHBOX_PAYTI_TITLE'] . '</b> осуществляется через горячую линию по телефону 8-499-113-32-66 или через telegram-бот <a href="https://t.me/ecomkassa_help_bot">@ecomkassa_help_bot</a>';
+$MESS['SALE_CASHBOX_PAYTI_REQUEST_TOKEN_ERROR'] = 'Ошибка при получении токена';
+$MESS['SALE_CASHBOX_PAYTI_CHECK_REG_ERROR'] = 'Ошибка при регистрации чека';
+$MESS['SALE_CASHBOX_PAYTI_REQUEST_STATUS_WAIT'] = 'Повторите запрос позже';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SETTINGS_AUTH'] = 'Настройки авторизации';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SETTINGS_AUTH_LOGIN_LABEL'] = 'Логин';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SETTINGS_AUTH_PASS_LABEL'] = 'Пароль';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SETTINGS_SERVICE'] = 'Информация об организации';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SETTINGS_SERVICE_INN_LABEL'] = 'ИНН организации';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SETTINGS_SERVICE_EMAIL_LABEL'] = 'Email организации';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SETTINGS_SERVICE_URL_LABEL'] = 'Адрес интернет-магазина(url)';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SETTINGS_CLIENT'] = 'Информация о клиенте';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SETTINGS_CLIENT_INFO'] = 'Данные о клиенте';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SETTINGS_CLIENT_NONE'] = 'По умолчанию';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SETTINGS_CLIENT_PHONE'] = 'Телефон';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SETTINGS_CLIENT_EMAIL'] = 'Email';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SETTINGS_P_TYPE'] = 'Настройки оплат';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SETTINGS_P_TYPE_LABEL_CASH'] = 'Наличный';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SETTINGS_P_TYPE_LABEL_CASHLESS'] = 'Безналичный';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SETTINGS_SNO'] = 'Налогообложение';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SETTINGS_SNO_LABEL'] = 'Система налогообложения';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SNO_OSN'] = 'общая';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SNO_UI'] = 'упрощенная';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SNO_UIO'] = 'упрощенная (доходы минус расходы)';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SNO_ENVD'] = 'единый налог на вмененный доход';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SNO_ESN'] = 'единый сельскохозяйственный налог';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SNO_PATENT'] = 'патентная';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SETTINGS_INTERACTION'] = 'Настройки взаимодействия';
+$MESS['SALE_CASHBOX_PAYTI_FARM_SETTINGS_MODE_HANDLER_LABEL'] = 'Режим работы кассы';
+$MESS['SALE_CASHBOX_PAYTI_FARM_MODE_TEST'] = 'тестовый';
+$MESS['SALE_CASHBOX_PAYTI_FARM_MODE_ACTIVE'] = 'боевой';
+$MESS['SALE_CASHBOX_PAYTI_ERR_EMPTY_PHONE_EMAIL'] = 'Невалидные данные. Не указан ни телефон, ни email покупателя.';
+$MESS['SALE_CASHBOX_PAYTI_ERR_EMPTY_TAX'] = 'Некорректные настройки налоговой ставки';
