@@ -1,0 +1,7 @@
+/vendor
+/.php-cs-fixer.cache
+/composer.json
+/composer.lock
+/composer.phar
+/*.tar.gz
+/.last_version
