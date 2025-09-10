@@ -1,6 +1,6 @@
 <?php
 
-namespace Payti\Check;
+namespace Ecomkassa\Payti;
 
 use Bitrix\Main\Application;
 use Bitrix\Main\EventResult;
@@ -20,7 +20,7 @@ class Handler
         return new EventResult(
             EventResult::SUCCESS,
             [
-                '\Payti\Check\PaytiCheck' => $directory . '/PaytiCheck.php',
+                '\Ecomkassa\Payti\PaytiCheck' => $directory . '/PaytiCheck.php',
             ]
         );
     }

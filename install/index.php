@@ -7,14 +7,14 @@ use Bitrix\Main\EventManager;
 
 Loc::loadMessages(__FILE__);
 
-if (class_exists('payti_check')) {
+if (class_exists('ecomkassa_payti')) {
 
     return;
 }
 
-class payti_check extends CModule
+class ecomkassa_payti extends CModule
 {
-    public $MODULE_ID = 'payti.check';
+    public $MODULE_ID = 'ecomkassa.payti';
     public $MODULE_VERSION;
     public $MODULE_VERSION_DATE;
     public $MODULE_NAME;
@@ -28,10 +28,10 @@ class payti_check extends CModule
 
         $this->MODULE_VERSION = $arModuleVersion['VERSION'];
         $this->MODULE_VERSION_DATE = $arModuleVersion['VERSION_DATE'];
-        $this->MODULE_NAME = Loc::getMessage('PAYTI_USER_MODULE_NAME');
-        $this->MODULE_DESCRIPTION = Loc::getMessage('PAYTI_USER_MODULE_DESCRIPTION');
-        $this->PARTNER_NAME = Loc::getMessage('PAYTI_USER_PARTNER_NAME');
-        $this->PARTNER_URI = Loc::getMessage('PAYTI_USER_PARTNER_URI');
+        $this->MODULE_NAME = Loc::getMessage('ECOMKASSA_PAYTI_USER_MODULE_NAME');
+        $this->MODULE_DESCRIPTION = Loc::getMessage('ECOMKASSA_PAYTI_USER_MODULE_DESCRIPTION');
+        $this->PARTNER_NAME = Loc::getMessage('ECOMKASSA_PAYTI_USER_PARTNER_NAME');
+        $this->PARTNER_URI = Loc::getMessage('ECOMKASSA_PAYTI_USER_PARTNER_URI');
     }
 
     public function DoInstall()
@@ -66,18 +66,18 @@ class payti_check extends CModule
     {
         $eventManager = EventManager::getInstance();
 
-        $this->registerPaytiCheckCashboxHandler($eventManager);
+        $this->registerEcomkassaPaytiCashboxHandler($eventManager);
     }
 
-    public function registerPaytiCheckCashboxHandler($eventManager): void
+    public function registerEcomkassaPaytiCashboxHandler($eventManager): void
     {
-        $eventManager->registerEventHandler('sale', 'OnGetCustomCashboxHandlers', $this->MODULE_ID, '\Payti\Check\Handler', 'onGetCustomCashboxHandler');
+        $eventManager->registerEventHandler('sale', 'OnGetCustomCashboxHandlers', $this->MODULE_ID, '\Ecomkassa\Payti\Handler', 'onGetCustomCashboxHandler');
     }
 
     public function unregisterHandlers(): void
     {
         $eventManager = EventManager::getInstance();
 
-        $eventManager->unregisterEventHandler('sale', 'OnGetCustomCashboxHandlers', $this->MODULE_ID, '\Payti\Check\Handler', 'onGetCustomCashboxHandler');
+        $eventManager->unregisterEventHandler('sale', 'OnGetCustomCashboxHandlers', $this->MODULE_ID, '\Ecomkassa\Payti\Handler', 'onGetCustomCashboxHandler');
     }
 }

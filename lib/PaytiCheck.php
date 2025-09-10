@@ -1,6 +1,6 @@
 <?php
 
-namespace Payti\Check;
+namespace Ecomkassa\Payti;
 
 use Bitrix\Main\PhoneNumber;
 use Bitrix\Main;
@@ -51,7 +51,7 @@ class PaytiCheck extends Cashbox implements IPrintImmediately, ICheckable, ICorr
     public const REQUEST_TYPE_GET = 'get';
     public const REQUEST_TYPE_POST = 'post';
 
-    public const TOKEN_OPTION_NAME = 'payti_access_token';
+    public const TOKEN_OPTION_NAME = 'ecomkassa_payti_access_token';
 
     public const SERVICE_URL = 'https://app.ecomkassa.ru/fiscalorder/v5';
     public const SERVICE_TEST_URL = 'https://app.ecomkassa.ru/fiscalorder/v5';
@@ -287,7 +287,7 @@ class PaytiCheck extends Cashbox implements IPrintImmediately, ICheckable, ICorr
         if ($token === '') {
             $token = $this->requestAccessToken();
             if ($token === '') {
-                $printResult->addError(new Main\Error(Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_REQUEST_TOKEN_ERROR')));
+                $printResult->addError(new Main\Error(Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_REQUEST_TOKEN_ERROR')));
                 return $printResult;
             }
         }
@@ -304,7 +304,7 @@ class PaytiCheck extends Cashbox implements IPrintImmediately, ICheckable, ICorr
         if ($response['http_code'] === static::RESPONSE_HTTP_CODE_401) {
             $token = $this->requestAccessToken();
             if ($token === '') {
-                $printResult->addError(new Main\Error(Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_REQUEST_TOKEN_ERROR')));
+                $printResult->addError(new Main\Error(Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_REQUEST_TOKEN_ERROR')));
                 return $printResult;
             }
 
@@ -321,13 +321,13 @@ class PaytiCheck extends Cashbox implements IPrintImmediately, ICheckable, ICorr
             if ($response['uuid']) {
                 $printResult->setData(array('UUID' => $response['uuid']));
             } else {
-                $printResult->addError(new Main\Error(Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_CHECK_REG_ERROR')));
+                $printResult->addError(new Main\Error(Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_CHECK_REG_ERROR')));
             }
         } else {
             if (isset($response['error']['text'])) {
                 $printResult->addError(new Main\Error($response['error']['text']));
             } else {
-                $printResult->addError(new Main\Error(Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_CHECK_REG_ERROR')));
+                $printResult->addError(new Main\Error(Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_CHECK_REG_ERROR')));
             }
         }
 
@@ -362,7 +362,7 @@ class PaytiCheck extends Cashbox implements IPrintImmediately, ICheckable, ICorr
         if ($response['http_code'] === static::RESPONSE_HTTP_CODE_401) {
             $token = $this->requestAccessToken();
             if ($token === '') {
-                $result->addError(new Main\Error(Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_REQUEST_TOKEN_ERROR')));
+                $result->addError(new Main\Error(Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_REQUEST_TOKEN_ERROR')));
                 return $result;
             }
 
@@ -383,7 +383,7 @@ class PaytiCheck extends Cashbox implements IPrintImmediately, ICheckable, ICorr
         $response['uuid'] = $uuid;
 
         if ($response['status'] === 'wait') {
-            $result->addError(new Main\Error(Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_REQUEST_STATUS_WAIT')));
+            $result->addError(new Main\Error(Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_REQUEST_STATUS_WAIT')));
             return $result;
         }
 
@@ -458,11 +458,11 @@ class PaytiCheck extends Cashbox implements IPrintImmediately, ICheckable, ICorr
         $settings = [];
         $settings['MSG'] = [
             'LABEL' => '</td>
-</tr><tr class="payti-warning-trick">
+</tr><tr class="ecomkassa-payti-warning-trick">
 <td colspan="2" style="text-align: center;">
 <div class="adm-info-message-wrap"><div class="adm-info-message" style="width: 100%; box-sizing: border-box;">
-            <div>' . Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_WARNING') . '</div></div></div><script>
-document.querySelector(".payti-warning-trick").previousSibling.style.display = "none";
+            <div>' . Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_WARNING') . '</div></div></div><script>
+document.querySelector(".ecomkassa-payti-warning-trick").previousSibling.style.display = "none";
 
 if (tr_NUMBER_KKM) {
     var d = document.createElement("div");
@@ -478,52 +478,52 @@ if (tr_USE_OFFLINE) {
         ];
 
         $settings['AUTH'] = [
-                'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SETTINGS_AUTH'),
+                'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SETTINGS_AUTH'),
                 'REQUIRED' => 'Y',
                 'ITEMS' => array(
                     'LOGIN' => array(
                         'TYPE' => 'STRING',
-                        'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SETTINGS_AUTH_LOGIN_LABEL')
+                        'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SETTINGS_AUTH_LOGIN_LABEL')
                     ),
                     'PASS' => array(
                         'TYPE' => 'STRING',
-                        'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SETTINGS_AUTH_PASS_LABEL')
+                        'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SETTINGS_AUTH_PASS_LABEL')
                     ),
                 )
             ];
 
         $settings['SERVICE'] = [
-                'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SETTINGS_SERVICE'),
+                'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SETTINGS_SERVICE'),
                 'REQUIRED' => 'Y',
                 'ITEMS' => array(
                     'INN' => array(
                         'TYPE' => 'STRING',
-                        'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SETTINGS_SERVICE_INN_LABEL')
+                        'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SETTINGS_SERVICE_INN_LABEL')
                     ),
                     'P_ADDRESS' => array(
                         'TYPE' => 'STRING',
-                        'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SETTINGS_SERVICE_URL_LABEL')
+                        'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SETTINGS_SERVICE_URL_LABEL')
                     ),
                 )
             ];
         $settings['CLIENT'] = [
-                'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SETTINGS_CLIENT'),
+                'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SETTINGS_CLIENT'),
                 'ITEMS' => array(
                     'INFO' => array(
                         'TYPE' => 'ENUM',
                         'VALUE' => 'NONE',
-                        'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SETTINGS_CLIENT_INFO'),
+                        'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SETTINGS_CLIENT_INFO'),
                         'OPTIONS' => array(
-                            'NONE' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SETTINGS_CLIENT_NONE'),
-                            'PHONE' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SETTINGS_CLIENT_PHONE'),
-                            'EMAIL' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SETTINGS_CLIENT_EMAIL'),
+                            'NONE' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SETTINGS_CLIENT_NONE'),
+                            'PHONE' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SETTINGS_CLIENT_PHONE'),
+                            'EMAIL' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SETTINGS_CLIENT_EMAIL'),
                         )
                     ),
                 )
             ];
 
         $settings['PAYMENT_TYPE'] = array(
-            'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SETTINGS_P_TYPE'),
+            'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SETTINGS_P_TYPE'),
             'REQUIRED' => 'Y',
             'ITEMS' => array()
         );
@@ -535,7 +535,7 @@ if (tr_USE_OFFLINE) {
         foreach ($systemPaymentType as $type => $value) {
             $settings['PAYMENT_TYPE']['ITEMS'][$type] = array(
                 'TYPE' => 'STRING',
-                'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SETTINGS_P_TYPE_LABEL_'.mb_strtoupper($type)),
+                'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SETTINGS_P_TYPE_LABEL_'.mb_strtoupper($type)),
                 'VALUE' => $value
             );
         }
@@ -578,20 +578,20 @@ if (tr_USE_OFFLINE) {
         }
 
         $settings['TAX'] = array(
-            'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SETTINGS_SNO'),
+            'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SETTINGS_SNO'),
             'REQUIRED' => 'Y',
             'ITEMS' => array(
                 'SNO' => array(
                     'TYPE' => 'ENUM',
-                    'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SETTINGS_SNO_LABEL'),
+                    'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SETTINGS_SNO_LABEL'),
                     'VALUE' => 'osn',
                     'OPTIONS' => array(
-                        'osn' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SNO_OSN'),
-                        'usn_income' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SNO_UI'),
-                        'usn_income_outcome' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SNO_UIO'),
-                        'envd' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SNO_ENVD'),
-                        'esn' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SNO_ESN'),
-                        'patent' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SNO_PATENT')
+                        'osn' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SNO_OSN'),
+                        'usn_income' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SNO_UI'),
+                        'usn_income_outcome' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SNO_UIO'),
+                        'envd' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SNO_ENVD'),
+                        'esn' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SNO_ESN'),
+                        'patent' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SNO_PATENT')
                     )
                 )
             )
@@ -605,19 +605,19 @@ if (tr_USE_OFFLINE) {
 
         $settings['SERVICE']['ITEMS']['EMAIL'] = [
             'TYPE' => 'STRING',
-            'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SETTINGS_SERVICE_EMAIL_LABEL'),
+            'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SETTINGS_SERVICE_EMAIL_LABEL'),
             'VALUE' => static::getDefaultServiceEmail()
         ];
 
         $settings['INTERACTION'] = [
-            'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SETTINGS_INTERACTION'),
+            'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SETTINGS_INTERACTION'),
             'ITEMS' => [
                 'MODE_HANDLER' => [
                     'TYPE' => 'ENUM',
-                    'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_SETTINGS_MODE_HANDLER_LABEL'),
+                    'LABEL' => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_SETTINGS_MODE_HANDLER_LABEL'),
                     'OPTIONS' => [
-                        static::HANDLER_MODE_ACTIVE => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_MODE_ACTIVE'),
-                        static::HANDLER_MODE_TEST => Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_FARM_MODE_TEST'),
+                        static::HANDLER_MODE_ACTIVE => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_MODE_ACTIVE'),
+                        static::HANDLER_MODE_TEST => Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_FARM_MODE_TEST'),
                     ]
                 ]
             ]
@@ -942,12 +942,12 @@ if (tr_USE_OFFLINE) {
         $result = new Result();
 
         if (empty($checkData['receipt']['client']['email']) && empty($checkData['receipt']['client']['phone'])) {
-            $result->addError(new Main\Error(Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_ERR_EMPTY_PHONE_EMAIL')));
+            $result->addError(new Main\Error(Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_ERR_EMPTY_PHONE_EMAIL')));
         }
 
         foreach ($checkData['receipt']['items'] as $item) {
             if ($item['vat'] === null) {
-                $result->addError(new Main\Error(Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_ERR_EMPTY_TAX')));
+                $result->addError(new Main\Error(Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_ERR_EMPTY_TAX')));
                 break;
             }
         }
@@ -1199,7 +1199,7 @@ if (tr_USE_OFFLINE) {
      */
     public static function getName()
     {
-        return Localization\Loc::getMessage('SALE_CASHBOX_PAYTI_TITLE');
+        return Localization\Loc::getMessage('SALE_CASHBOX_ECOMKASSA_PAYTI_TITLE');
     }
 
     /**
